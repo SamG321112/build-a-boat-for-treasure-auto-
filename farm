@@ -1,8 +1,11 @@
 local Name = game.Players.LocalPlayer.Name
-local ScreenGui = Instance.new("ScreenGui")
+local TweenService = game:GetService("TweenService") 
+local CheatDestroy = false 
+local Player = game.Players.LocalPlayer 
+local ScreenGui = Instance.new("ScreenGui") 
 local Frame = Instance.new("Frame")
 local Label = Instance.new("TextLabel")
-local Button = Instance.new("TextButton")
+local AutoFarmButton = Instance.new("TextButton")
 local InfiniteJumpButton = Instance.new("TextButton")
 local CopyDiscordButton = Instance.new("TextButton")
 local UI = Instance.new("UICorner")
@@ -25,12 +28,12 @@ Frame.Position = UDim2.new(0, 0, 0.55, 0)
 Frame.BackgroundColor3 = Color3.fromRGB(26, 27, 42)
 Frame.Size = UDim2.new(0, 250, 0, 250)
 
-Button.Parent = Frame
-Button.Position = UDim2.new(0.15, 0, 0.25, 0)
-Button.Size = UDim2.new(0, 150, 0, 50)
-Button.Text = "Start Farming"
-Button.BackgroundColor3 = Color3.fromRGB(100, 177, 0)
-Button.TextScaled = true
+AutoFarmButton.Parent = Frame
+AutoFarmButton.Position = UDim2.new(0.15, 0, 0.25, 0)
+AutoFarmButton.Size = UDim2.new(0, 150, 0, 50)
+AutoFarmButton.Text = "Enable AutoFarm"
+AutoFarmButton.BackgroundColor3 = Color3.fromRGB(100, 177, 0)
+AutoFarmButton.TextScaled = true
 
 InfiniteJumpButton.Parent = Frame
 InfiniteJumpButton.Position = UDim2.new(0.15, 0, 0.5, 0)
@@ -51,16 +54,15 @@ CuteImage.Size = UDim2.new(0, 30, 0, 30)
 CuteImage.Position = UDim2.new(1, -35, 0, 10)
 CuteImage.Image = "rbxassetid://12345678" -- Change this to the image ID you prefer
 
-UI.Parent = Button
+UI.Parent = AutoFarmButton
 UI2.Parent = InfiniteJumpButton
 UI3.Parent = CopyDiscordButton
 UI4.Parent = Frame
 UI5.Parent = Label
 UI6.Parent = CuteImage
 
-db = false
-autoFarmEnabled = false
-infiniteJumpEnabled = false
+local db = false
+local infiniteJumpEnabled = false
 local infiniteJumpConnection
 
 ScreenGui.Name = "HaxGui"
@@ -68,81 +70,44 @@ ScreenGui.ResetOnSpawn = false
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.Parent = game.Players.LocalPlayer.PlayerGui
 
-if game.PlaceId > 537413528 or game.PlaceId < 537413528 then
-    Button.Text = "Bro, Its Not Babft."
-    Button.Active = false
+function InstantWin() 
+    repeat task.wait() until Player.Character ~= nil 
+    local Character = Player.Character 
+    local TempPart = Instance.new("Part") 
+    TempPart.Position = Vector3.new(-50,60,0) 
+    local TempPartTween = TweenService:Create(TempPart, TweenInfo.new(10, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Position = Vector3.new(-50,60,8500)}) 
+    TempPartTween:Play() 
+    repeat task.wait() 
+        if CheatDestroy == false then 
+            Character:PivotTo(TempPart.CFrame) 
+        end 
+    until TempPart.Position == Vector3.new(-50,60,8500) 
+    local TempPartTween2 = TweenService:Create(TempPart, TweenInfo.new(2, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Position = Vector3.new(-50,-360,9500)}) 
+    TempPartTween2:Play() 
+    repeat task.wait() 
+        if CheatDestroy == false then 
+            Character:PivotTo(TempPart.CFrame) 
+        end 
+    until TempPart.Position == Vector3.new(-50,-360,9500) 
 end
 
-function AutoFarm()
-    while autoFarmEnabled do
-        if game.PlaceId == 537413528 then
-            Button.Text = 'Successfully Farming (Click To Stop)'
-            Button.Draggable = false
-            Button.Active = false
-            Button.BackgroundColor3 =  Color3.fromRGB(85, 255, 127)
-            wait(1)
-            local endi = game.Workspace.BoatStages.NormalStages.TheEnd.GoldenChest.Trigger
-            wait(1)
-            repeat wait(0.1) until game.Workspace:FindFirstChild(Name):FindFirstChild("HumanoidRootPart")
-            local body = game.Workspace:FindFirstChild(Name).HumanoidRootPart
-            repeat wait(0.1) until game.Workspace:FindFirstChild(Name):FindFirstChild("Humanoid")
-            local hum = game.Workspace:FindFirstChild(Name).Humanoid
-            local gyro = Instance.new("BodyPosition")
-            gyro.Parent = body
-            body.CFrame = CFrame.new(0,0,0)
-            wait(3)
-            gyro.Position = game.Workspace.BoatStages.NormalStages.CaveStage1.DarknessPart.Position
-            wait(3)
-            gyro.Position = game.Workspace.BoatStages.NormalStages.CaveStage2.DarknessPart.Position
-            wait(3)
-            gyro.Position = game.Workspace.BoatStages.NormalStages.CaveStage3.DarknessPart.Position
-            wait(3)
-            gyro.Position = game.Workspace.BoatStages.NormalStages.CaveStage4.DarknessPart.Position
-            wait(3)
-            gyro.Position = game.Workspace.BoatStages.NormalStages.CaveStage5.DarknessPart.Position
-            wait(3)
-            gyro.Position = game.Workspace.BoatStages.NormalStages.CaveStage6.DarknessPart.Position
-            wait(3)
-            gyro.Position = game.Workspace.BoatStages.NormalStages.CaveStage7.DarknessPart.Position
-            wait(3)
-            gyro.Position = game.Workspace.BoatStages.NormalStages.CaveStage8.DarknessPart.Position
-            wait(3)
-            gyro.Position = game.Workspace.BoatStages.NormalStages.CaveStage9.DarknessPart.Position
-            wait(3)
-            gyro.Position = game.Workspace.BoatStages.NormalStages.CaveStage10.DarknessPart.Position
-            wait(2.5)
-            gyro.Position = endi.Position
-            body.CFrame = endi.CFrame
-        end
-    end
-end
-
-function OnClicked(plr)
-    if autoFarmEnabled == false then
-        autoFarmEnabled = true
-        Button.Text = "AutoFarm Enabled"
-        Button.BackgroundColor3 = Color3.fromRGB(85, 255, 127)
-        db = true
-        spawn(AutoFarm)
+AutoFarmButton.MouseButton1Click:Connect(function()
+    if AutoFarmButton.Text == "Enable AutoFarm" then
+        AutoFarmButton.Text = "AutoFarm Enabled"
+        AutoFarmButton.BackgroundColor3 = Color3.fromRGB(85, 255, 127)
+        CheatDestroy = false
+        spawn(InstantWin)
     else
-        autoFarmEnabled = false
-        db = false
-        Button.Text = "Start Farming"
-        Button.BackgroundColor3 = Color3.fromRGB(100, 177, 0)
-    end
-end
-
-Button.MouseButton1Click:Connect(OnClicked)
-
-game.Players.LocalPlayer.CharacterAdded:Connect(function()
-    if autoFarmEnabled then
-        spawn(AutoFarm)
+        AutoFarmButton.Text = "Enable AutoFarm"
+        AutoFarmButton.BackgroundColor3 = Color3.fromRGB(100, 177, 0)
+        CheatDestroy = true
     end
 end)
 
 InfiniteJumpButton.MouseButton1Click:Connect(function()
-    if infiniteJumpEnabled == false then
-        infiniteJumpEnabled = true
+    if InfiniteJumpButton.Text == "Enable Infinite Jump" then
+        InfiniteJumpButton.Text = "Infinite Jump Enabled"
+        InfiniteJumpButton.BackgroundColor3 = Color3.fromRGB(85, 255, 127)
         local player = game.Players.LocalPlayer
         local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
 
@@ -153,10 +118,7 @@ InfiniteJumpButton.MouseButton1Click:Connect(function()
         end
 
         infiniteJumpConnection = game:GetService("UserInputService").JumpRequest:Connect(onJumpRequest)
-        InfiniteJumpButton.Text = "Infinite Jump Enabled"
-        InfiniteJumpButton.BackgroundColor3 = Color3.fromRGB(85, 255, 127)
     else
-        infiniteJumpEnabled = false
         InfiniteJumpButton.Text = "Enable Infinite Jump"
         InfiniteJumpButton.BackgroundColor3 = Color3.fromRGB(100, 177, 0)
         if infiniteJumpConnection then
@@ -171,3 +133,11 @@ CopyDiscordButton.MouseButton1Click:Connect(function()
     wait(2)
     CopyDiscordButton.Text = "Copy Discord Link"
 end)
+
+game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
+    if not CheatDestroy and AutoFarmButton.Text == "AutoFarm Enabled" then
+        wait(8) -- Delay to ensure character is fully loaded and reset
+        spawn(InstantWin)
+    end
+end)
+
