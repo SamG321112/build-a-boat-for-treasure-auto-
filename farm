@@ -1,0 +1,173 @@
+local Name = game.Players.LocalPlayer.Name
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local Label = Instance.new("TextLabel")
+local Button = Instance.new("TextButton")
+local InfiniteJumpButton = Instance.new("TextButton")
+local CopyDiscordButton = Instance.new("TextButton")
+local UI = Instance.new("UICorner")
+local UI2 = Instance.new("UICorner")
+local UI3 = Instance.new("UICorner")
+local UI4 = Instance.new("UICorner")
+local UI5 = Instance.new("UICorner")
+local UI6 = Instance.new("UICorner")
+local CuteImage = Instance.new("ImageLabel")
+
+Label.Parent = Frame
+Label.TextColor3 = Color3.fromRGB(135, 137, 170)
+Label.BackgroundTransparency = 1
+Label.TextScaled = true
+Label.Size = UDim2.new(0, 200, 0, 50)
+Label.Text = "Made by @X1234"
+
+Frame.Parent = ScreenGui
+Frame.Position = UDim2.new(0, 0, 0.55, 0)
+Frame.BackgroundColor3 = Color3.fromRGB(26, 27, 42)
+Frame.Size = UDim2.new(0, 250, 0, 250)
+
+Button.Parent = Frame
+Button.Position = UDim2.new(0.15, 0, 0.25, 0)
+Button.Size = UDim2.new(0, 150, 0, 50)
+Button.Text = "Start Farming"
+Button.BackgroundColor3 = Color3.fromRGB(100, 177, 0)
+Button.TextScaled = true
+
+InfiniteJumpButton.Parent = Frame
+InfiniteJumpButton.Position = UDim2.new(0.15, 0, 0.5, 0)
+InfiniteJumpButton.Size = UDim2.new(0, 150, 0, 50)
+InfiniteJumpButton.Text = "Enable Infinite Jump"
+InfiniteJumpButton.BackgroundColor3 = Color3.fromRGB(100, 177, 0)
+InfiniteJumpButton.TextScaled = true
+
+CopyDiscordButton.Parent = Frame
+CopyDiscordButton.Position = UDim2.new(0.15, 0, 0.75, 0)
+CopyDiscordButton.Size = UDim2.new(0, 150, 0, 50)
+CopyDiscordButton.Text = "Copy Discord Link"
+CopyDiscordButton.BackgroundColor3 = Color3.fromRGB(0, 122, 255)
+CopyDiscordButton.TextScaled = true
+
+CuteImage.Parent = CopyDiscordButton
+CuteImage.Size = UDim2.new(0, 30, 0, 30)
+CuteImage.Position = UDim2.new(1, -35, 0, 10)
+CuteImage.Image = "rbxassetid://12345678" -- Change this to the image ID you prefer
+
+UI.Parent = Button
+UI2.Parent = InfiniteJumpButton
+UI3.Parent = CopyDiscordButton
+UI4.Parent = Frame
+UI5.Parent = Label
+UI6.Parent = CuteImage
+
+db = false
+autoFarmEnabled = false
+infiniteJumpEnabled = false
+local infiniteJumpConnection
+
+ScreenGui.Name = "HaxGui"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.Parent = game.Players.LocalPlayer.PlayerGui
+
+if game.PlaceId > 537413528 or game.PlaceId < 537413528 then
+    Button.Text = "Bro, Its Not Babft."
+    Button.Active = false
+end
+
+function AutoFarm()
+    while autoFarmEnabled do
+        if game.PlaceId == 537413528 then
+            Button.Text = 'Successfully Farming (Click To Stop)'
+            Button.Draggable = false
+            Button.Active = false
+            Button.BackgroundColor3 =  Color3.fromRGB(85, 255, 127)
+            wait(1)
+            local endi = game.Workspace.BoatStages.NormalStages.TheEnd.GoldenChest.Trigger
+            wait(1)
+            repeat wait(0.1) until game.Workspace:FindFirstChild(Name):FindFirstChild("HumanoidRootPart")
+            local body = game.Workspace:FindFirstChild(Name).HumanoidRootPart
+            repeat wait(0.1) until game.Workspace:FindFirstChild(Name):FindFirstChild("Humanoid")
+            local hum = game.Workspace:FindFirstChild(Name).Humanoid
+            local gyro = Instance.new("BodyPosition")
+            gyro.Parent = body
+            body.CFrame = CFrame.new(0,0,0)
+            wait(3)
+            gyro.Position = game.Workspace.BoatStages.NormalStages.CaveStage1.DarknessPart.Position
+            wait(3)
+            gyro.Position = game.Workspace.BoatStages.NormalStages.CaveStage2.DarknessPart.Position
+            wait(3)
+            gyro.Position = game.Workspace.BoatStages.NormalStages.CaveStage3.DarknessPart.Position
+            wait(3)
+            gyro.Position = game.Workspace.BoatStages.NormalStages.CaveStage4.DarknessPart.Position
+            wait(3)
+            gyro.Position = game.Workspace.BoatStages.NormalStages.CaveStage5.DarknessPart.Position
+            wait(3)
+            gyro.Position = game.Workspace.BoatStages.NormalStages.CaveStage6.DarknessPart.Position
+            wait(3)
+            gyro.Position = game.Workspace.BoatStages.NormalStages.CaveStage7.DarknessPart.Position
+            wait(3)
+            gyro.Position = game.Workspace.BoatStages.NormalStages.CaveStage8.DarknessPart.Position
+            wait(3)
+            gyro.Position = game.Workspace.BoatStages.NormalStages.CaveStage9.DarknessPart.Position
+            wait(3)
+            gyro.Position = game.Workspace.BoatStages.NormalStages.CaveStage10.DarknessPart.Position
+            wait(2.5)
+            gyro.Position = endi.Position
+            body.CFrame = endi.CFrame
+        end
+    end
+end
+
+function OnClicked(plr)
+    if autoFarmEnabled == false then
+        autoFarmEnabled = true
+        Button.Text = "AutoFarm Enabled"
+        Button.BackgroundColor3 = Color3.fromRGB(85, 255, 127)
+        db = true
+        spawn(AutoFarm)
+    else
+        autoFarmEnabled = false
+        db = false
+        Button.Text = "Start Farming"
+        Button.BackgroundColor3 = Color3.fromRGB(100, 177, 0)
+    end
+end
+
+Button.MouseButton1Click:Connect(OnClicked)
+
+game.Players.LocalPlayer.CharacterAdded:Connect(function()
+    if autoFarmEnabled then
+        spawn(AutoFarm)
+    end
+end)
+
+InfiniteJumpButton.MouseButton1Click:Connect(function()
+    if infiniteJumpEnabled == false then
+        infiniteJumpEnabled = true
+        local player = game.Players.LocalPlayer
+        local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+
+        local function onJumpRequest()
+            if humanoid then
+                humanoid:ChangeState("Jumping")
+            end
+        end
+
+        infiniteJumpConnection = game:GetService("UserInputService").JumpRequest:Connect(onJumpRequest)
+        InfiniteJumpButton.Text = "Infinite Jump Enabled"
+        InfiniteJumpButton.BackgroundColor3 = Color3.fromRGB(85, 255, 127)
+    else
+        infiniteJumpEnabled = false
+        InfiniteJumpButton.Text = "Enable Infinite Jump"
+        InfiniteJumpButton.BackgroundColor3 = Color3.fromRGB(100, 177, 0)
+        if infiniteJumpConnection then
+            infiniteJumpConnection:Disconnect()
+        end
+    end
+end)
+
+CopyDiscordButton.MouseButton1Click:Connect(function()
+    setclipboard("https://discord.gg/t6UgyY65")
+    CopyDiscordButton.Text = "Copied!"
+    wait(2)
+    CopyDiscordButton.Text = "Copy Discord Link"
+end)
